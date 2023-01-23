@@ -8,7 +8,7 @@ from pyaml_env import parse_config
 from dagster import job, op, repository
 from dagster import schedule, OpExecutionContext, ScheduleEvaluationContext, RunRequest
 
-from src import tools as t
+from projects.src import tools as t
 sys.path.extend(['projects'])
 sys.path.extend(['projects/packages'])
 # binance-historical-market-data
