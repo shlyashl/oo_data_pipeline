@@ -13,7 +13,7 @@ import aiohttp
 logger = logging
 logger.basicConfig(
     format=f'%(asctime)s [%(levelname)s] %(name)s:\t\t%(message)s',
-    level=logging.DEBUG
+    level=logging.INFO
 )
 
 
@@ -77,6 +77,26 @@ class ClickHouse:
             raise Exception(r.text)
 
         logger.info(f'{table} truncated')
+
+    def drop_part(self, part_name, table=None):
+        table = table if table else self._table
+        query_dict = {'query': f"alter table {table} drop partition '{part_name}'"}
+
+        r = requests.post(self._host, params=query_dict, auth=(self._user, self._password), verify=False)
+        if r.status_code != 200:
+            raise Exception(r.text)
+
+        logger.info(f'{table}/{part_name} droped')
+
+    def run_query(self, query:str, table=None):
+        table = table if table else self._table
+        query_dict = {'query': query}
+
+        r = requests.post(self._host, params=query_dict, auth=(self._user, self._password), verify=False)
+        if r.status_code != 200:
+            raise Exception(r.text)
+
+        logger.info(f'{query.split(" ", 1)[0]} query succeeded')
 
     @try_again
     def select(self, query) -> pd.DataFrame:

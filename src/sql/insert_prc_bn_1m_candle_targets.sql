@@ -3,7 +3,7 @@ select *
 from (
     with calculated as (
         with
-            'price_increase_{timeframe_size_in_minutes}' as target_name,
+            'price_increase_{past_avg_price_minute_start}'                              as target_name,
             toDate('{part_name}')                                                       as part_name,
             {past_avg_price_minute_start}                                               as past_avg_price_minute_start,
             {past_avg_price_minute_end}                                                 as past_avg_price_minute_end,
