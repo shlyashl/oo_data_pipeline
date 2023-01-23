@@ -1,0 +1,4 @@
+clickhouse:
+  host: 'http://45.87.104.115:8123/'
+  user: 'oo'
+  password: !ENV ${CH_OO_PASS}
