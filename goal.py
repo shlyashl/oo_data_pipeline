@@ -25,7 +25,7 @@ import pandas as pd
 
 
 
-ch = ClickHouse(**config['clickhouse'], table='prc_bn_1m_candle_set')
+ch = ClickHouse(**config['clickhouse'], table='prc_bn_1m_candle_targets')
 for execution_date in pd.date_range(start="2017-08-18",end="2023-01-24"):
     ed = execution_date.strftime('%Y-%m-%d')
     print(ed)
